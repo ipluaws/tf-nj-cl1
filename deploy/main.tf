@@ -22,7 +22,7 @@ resource "aws_ecs_task_definition" "app_task" {
 
   container_definitions = jsonencode([{
     name      = "notejam"
-    image     = "${data.terraform_remote_state.infra.outputs.repository_url}"
+    image     = "${data.terraform_remote_state.infra.outputs.repository_url}:latest"
     essential = true
     portMappings = [{
       containerPort = 8000
