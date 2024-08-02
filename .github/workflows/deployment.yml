@@ -60,6 +60,21 @@ jobs:
             echo "Service does not exist or is inactive."
             echo "exists=false" >> $GITHUB_ENV
           fi
+      - name: Wait for service to terminate
+        if: env.exists == 'true'
+        run: |
+          SERVICE_NAME="notejam-service"
+          CLUSTER_NAME="${{ secrets.ECS_CLUSTER_NAME }}"
+          while :
+          do
+            SERVICE_STATUS=$(aws ecs describe-services --cluster $CLUSTER_NAME --services $SERVICE_NAME --query "services[0].status" --output text || echo "MISSING")
+            if [ "$SERVICE_STATUS" == "MISSING" ]; then
+              echo "Service is fully terminated."
+              break
+            fi
+            echo "Waiting for service to terminate..."
+            sleep 10
+          done
 
       - name: Initialize Terraform
         run: |
