@@ -76,4 +76,9 @@ resource "aws_ecs_service" "app_service" {
     container_name   = "notejam"
     container_port   = 8000
   }
+  lifecycle {
+    ignore_changes = [
+      desired_count
+    ]
+  }
 }
