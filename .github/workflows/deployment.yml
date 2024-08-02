@@ -66,8 +66,8 @@ jobs:
           CLUSTER_NAME="${{ secrets.ECS_CLUSTER_NAME }}"
           while :
           do
-            SERVICE_STATUS=$(aws ecs describe-services --cluster $CLUSTER_NAME --services $SERVICE_NAME --query "services[0].status" --output text || echo "MISSING")
-            if [ "$SERVICE_STATUS" == "MISSING" ]; then
+            SERVICE_STATUS=$(aws ecs describe-services --cluster $CLUSTER_NAME --services $SERVICE_NAME --query "services[0].status" --output text || echo "INACTIVE")
+            if [ "$SERVICE_STATUS" == "INACTIVE" ]; then
               echo "Service is fully terminated."
               break
             fi
