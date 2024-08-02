@@ -5,6 +5,7 @@ from flask import render_template, flash, request, redirect, url_for, abort
 from flask_login import (login_user, login_required, logout_user,
 current_user)
 from flask_mail import Message
+from flask import Flask, jsonify  
 
 from notejam import app, db, login_manager, mail
 from notejam.models import User, Note, Pad
