@@ -21,7 +21,7 @@ def load_user(user_id):
 def health():
     # You can add additional checks here, such as database connection status or other dependencies
     health_status = {
-        "status": "healthy"
+        "status": "OK"
     }
     return jsonify(health_status), 200
 
