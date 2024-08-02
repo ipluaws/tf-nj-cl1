@@ -19,7 +19,6 @@ def load_user(user_id):
 
 @app.route('/health')
 def health():
-    # You can add additional checks here, such as database connection status or other dependencies
     health_status = {
         "status": "OK"
     }
