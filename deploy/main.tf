@@ -5,7 +5,7 @@ provider "aws" {
 data "terraform_remote_state" "infra" {
   backend = "s3"
   config = {
-    bucket = "cp-terraform-state-infra"
+    bucket = "cpartner-terraform-state-infra"
     key    = "infra/terraform.tfstate"
     region = "eu-central-1"
   }
