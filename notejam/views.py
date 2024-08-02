@@ -16,7 +16,8 @@ DeleteForm, ChangePasswordForm, ForgotPasswordForm)
 def load_user(user_id):
     return User.query.get(user_id)
 
-def healthcheck():
+@app.route('/health')
+def health():
     # You can add additional checks here, such as database connection status or other dependencies
     health_status = {
         "status": "healthy"
