@@ -32,19 +32,19 @@ resource "aws_ecs_task_definition" "app_task" {
     environment = [
       {
         name  = "POSTGRES_USER"
-        value = "db_user"
+        value = data.terraform_remote_state.infra.outputs.db_username
       },
       {
         name  = "POSTGRES_PASS"
-        value = "8005258770"
+        value = data.terraform_remote_state.infra.outputs.db_password
       },
       {
         name  = "POSTGRES_DB"
-        value = "postgres"
+        value = data.terraform_remote_state.infra.outputs.db_name
       },
       {
         name  = "POSTGRES_URL"
-        value = "terraform-20240731205430996600000001.cr460m8coebf.eu-central-1.rds.amazonaws.com:5432"
+        value = data.terraform_remote_state.infra.outputs.db_instance_endpoint
       }
     ]
     logConfiguration = {
