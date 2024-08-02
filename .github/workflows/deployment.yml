@@ -1,8 +1,9 @@
-name: Automated Pipeline
+name: Build and Deploy
 
 on:
-  workflow_dispatch:
-
+  push:
+    branches:
+      - main
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
