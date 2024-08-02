@@ -20,7 +20,7 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install wheel
-          pip install -r tf-nj-cli/requirements.txt
+          pip install -r requirements.txt
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -36,7 +36,7 @@ jobs:
       - name: Build Docker image
         run: |
           IMAGE_TAG=${{ github.sha }}
-          docker build -t ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/demo:$IMAGE_TAG tf-nj-cli
+          docker build -t ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/demo:$IMAGE_TAG .
 
       - name: Push Docker image to ECR
         run: |
@@ -63,11 +63,11 @@ jobs:
 
       - name: Initialize Terraform
         run: |
-          cd tf-nj-cli/deploy
+          cd deploy
           terraform init
 
       - name: Apply Terraform Configuration
         run: |
-          cd tf-nj-cli/deploy
+          cd deploy
           IMAGE_URI="${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/demo:${{ github.sha }}"
           terraform apply -auto-approve -var "container_image=$IMAGE_URI"
