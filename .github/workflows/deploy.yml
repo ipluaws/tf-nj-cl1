@@ -27,7 +27,7 @@ jobs:
       - name: Build Docker image
         run: |
           IMAGE_TAG=${{ github.sha }}
-          docker build -t ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/demo:$IMAGE_TAG tf-nj-cli
+          docker build -t ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/demo:$IMAGE_TAG .
 
       - name: Push Docker image to ECR
         run: |
