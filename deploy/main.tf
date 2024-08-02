@@ -63,7 +63,7 @@ resource "aws_ecs_service" "app_service" {
   name            = "notejam-service"
   cluster         = data.terraform_remote_state.infra.outputs.ecs_cluster_id
   task_definition = aws_ecs_task_definition.app_task.arn
-  desired_count   = 1
+  desired_count   = 2
   launch_type     = "FARGATE"
 
   network_configuration {
